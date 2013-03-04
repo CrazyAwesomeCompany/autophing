@@ -1,0 +1,19 @@
+{
+    "name": "cac/autophing",
+    "description": "Predefined Phing targets",
+    "keywords": ["phing"],
+    "version": "0.1",
+    "homepage": "http://www.crazyawesomecompany.com",
+    "license": "BSD-3-Clause",
+    "support": {
+        "issues": "https://github.com/CrazyAwesomeCompany/autophing/issues",
+        "source": "https://github.com/CrazyAwesomeCompany/autophing"
+    },
+    "authors": [
+        {
+            "name": "Nick de Groot",
+            "email": "nick@crazyawesomecompany.com"
+        }
+    ]
+}
+

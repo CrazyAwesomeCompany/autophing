@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="webistrano" default="webistrano-login" basedir=".">
+    <property file="${phing.dir.webistrano}/webistrano.properties" />
+
+    <target name="webistano-deploy" description="start a deployment through webistrano">
+        <if>
+            <not><available file="${webistrano.storage.file}" /></not>
+            <then>
+                <phingcall target="webistrano-login" />
+            </then>
+        </if>
+
+        <exec passthru="${passthru}" executable="curl" escape="true">
+            <arg line="-b" />
+            <arg value="${webistrano.storage.file}" />
+            <arg line="-X" />
+            <arg value="POST" />
+            <arg value="${webistrano.url}/projects/${webistrano.project}/stages/${webistrano.project.stage}/deployments" />
+            <arg line="-d" />
+            <arg value="authenticity_token=${webistrano.token}&amp;deployment%5Btask%5D=deploy&amp;deployment%5Bdescription%5D=&amp;deployment%5Bprompt_config%5D%5Bbranch%5D=${webistrano.deploy.branch}&amp;deployment%5Boverride_locking%5D=&amp;commit=Start+deployment" />
+        </exec>
+    </target>
+
+    <target name="webistrano-login" description="Login to webistrano">
+        <exec passthru="${passthru}" executable="curl" escape="true">
+            <arg line="-c" />
+            <arg value="${webistrano.storage.file}" />
+            <arg line="-X" />
+            <arg value="POST" />
+            <arg value="${webistrano.url}" />
+            <arg line="-d" />
+            <arg value="authenticity_token=${webistrano.token}&amp;login=${webistrano.username}&amp;password=${webistrano.password}&amp;remember_me=1&amp;commit=Log+in" />
+        </exec>
+    </target>
+
+    <target name="webistrano-logout" description="Logout of webistrano">
+        <if>
+            <available file="${webistrano.storage.file}" />
+            <then>
+                <delete file="${webistrano.storage.file}" />
+            </then>
+        </if>
+    </target>
+
+</project>

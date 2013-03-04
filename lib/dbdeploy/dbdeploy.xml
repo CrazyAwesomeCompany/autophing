@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="dbdeploy" default="dbdeploy-update" basedir=".">
+    <property file="${phing.dir.dbdeploy}/dbdeploy.properties" />
+
+    <property name="dbdeploy.dsn" value="${database.driver}:dbname=${database.name};host=${database.host}" />
+
+    <target name="dbdeploy-clean" description="drop all tables">
+        <if>
+            <equals arg1="${database.password}" arg2="" />
+            <then>
+                <exec passthru="${passthru}"
+                    command="mysqldump -u${database.user} --add-drop-table --no-data ${database.name} | grep '^DROP\|^\/\*\!' | mysql -u${database.user} ${database.name}">
+                </exec>
+            </then>
+            <else>
+                <exec passthru="${passthru}"
+                    command="mysqldump -u${database.user} -p${database.password} --add-drop-table --no-data ${database.name} | grep '^DROP\|^\/\*\!' | mysql -u${database.user} -p${database.password} ${database.name}">
+                </exec>
+            </else>
+        </if>
+    </target>
+
+    <target name="dbdeploy-init" description="initialize changelog table">
+        <pdosqlexec
+            url="${dbdeploy.dsn}"
+            userid="${database.user}"
+            password="${database.password}"
+            src="${database.dbdeploy.changelog}"
+        />
+    </target>
+
+    <target name="dbdeploy-diff" depends="dbdeploy-init" description="generate db update/rollback script">
+        <if>
+            <available file="${database.deltas.folder}" type="dir" />
+        <then>
+            <dbdeploy
+                url="${dbdeploy.dsn}"
+                userid="${database.user}"
+                password="${database.password}"
+                dir="${database.deltas.folder}"
+                outputfile="${database.deltas.forward}"
+                undooutputfile="${database.deltas.undo}"
+            />
+            <property name="dbdeploy.diff.executed" value="true" />
+        </then>
+        <else>
+            <echo level="error">deltas folder: ${database.deltas.folder} not found, skipping database update</echo>
+        </else>
+        </if>
+    </target>
+
+    <target
+        name="dbdeploy-update"
+        description="updates the db based on the roll-forward script create by dbdeploy-diff"
+        depends="dbdeploy-diff"
+        if="dbdeploy.diff.executed"
+    >
+        <pdosqlexec
+            url="${dbdeploy.dsn}"
+            userid="${database.user}"
+            password="${database.password}"
+            src="${database.deltas.forward}"
+        />
+    </target>
+</project>

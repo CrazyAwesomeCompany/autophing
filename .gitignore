@@ -1,0 +1,8 @@
+# Exclude Eclipse project files
+.settings
+.buildpath
+.project
+
+# vendors
+vendor
+

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="composer" default="composer-install" basedir=".">
+    <property file="${phing.dir.composer}/composer.properties" />
+
+    <target name="composer-install" depends="composer-update">
+        <if>
+            <not><available file="${composer.lock}" /></not>
+            <then>
+                <exec passthru="${passthru}" executable="php">
+                    <arg value="${composer.file}" />
+                    <arg value="install" />
+                    <arg value="-n" />
+                    <arg value="--no-ansi" />
+                </exec>
+            </then>
+            <else>
+                <exec passthru="${passthru}" executable="php">
+                    <arg value="${composer.file}" />
+                    <arg value="update" />
+                    <arg value="-n" />
+                    <arg value="--no-ansi" />
+                </exec>
+            </else>
+        </if>
+    </target>
+
+    <target name="composer-install-dev" depends="composer-update">
+        <if>
+            <not><available file="${composer.lock}" /></not>
+            <then>
+                <exec passthru="${passthru}" executable="php">
+                    <arg value="${composer.file}" />
+                    <arg value="install" />
+                    <arg value="--dev" />
+                    <arg value="-n" />
+                    <arg value="--no-ansi" />
+                </exec>
+            </then>
+            <else>
+                <exec passthru="${passthru}" executable="php">
+                    <arg value="${composer.file}" />
+                    <arg value="update" />
+                    <arg value="--dev" />
+                    <arg value="-n" />
+                    <arg value="--no-ansi" />
+                </exec>
+            </else>
+        </if>
+    </target>
+
+    <target name="composer-update">
+        <exec passthru="${passthru}" executable="php">
+            <arg value="${composer.file}" />
+            <arg value="self-update" />
+        </exec>
+    </target>
+
+</project>

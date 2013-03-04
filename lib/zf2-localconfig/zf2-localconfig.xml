@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="zf2localconfig" default="zf2-generate-config" basedir=".">
+    <property file="${phing.dir.zf2localconfig}/zf2-localconfig.properties" />
+
+    <target name="zf2-generate-config"  description="generate configuration file based on .properties">
+        <copy file="${zf2.config.template}" tofile="${zf2.config.file}" overwrite="true">
+            <filterchain>
+                <expandproperties/>
+            </filterchain>
+        </copy>
+    </target>
+
+</project>
