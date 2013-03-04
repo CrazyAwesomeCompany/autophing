@@ -1,0 +1,4 @@
+autophing
+=========
+
+Automatic Phing targets
