@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="phplint" default="phplint" basedir=".">
+    <property file="${phing.dir.phplint}/phplint.properties" />
+
+    <target name="phplint-dirs">
+        <foreach list="${phplint.dir}" param="phplint.dir" target="phplint" />
+    </target>
+
+    <target name="phplint">
+        <phplint>
+            <fileset dir="${phplint.dir}">
+                <include name="*.php" />
+                <include name="**/*.php" />
+            </fileset>
+        </phplint>
+    </target>
+
+</project>
