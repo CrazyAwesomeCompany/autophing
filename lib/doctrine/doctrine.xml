@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="doctrine" basedir=".">
+    <property file="${phing.dir.doctrine}/doctrine.properties" />
+
+    <target name="doctrine-generate-proxies"  description="Generate the doctrine proxy files">
+        <mkdir dir="${doctrine.orm.proxy.dir}" />
+        <exec command="${doctrine.cli} orm:generate-proxies" />
+    </target>
+
+</project>

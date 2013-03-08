@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="zf" basedir=".">
+    <property file="${phing.dir.zf}/zf.properties" />
+
+    <target name="zf-generate-config"  description="generate configuration file based on .properties">
+        <copy file="${zf.config.template}" tofile="${zf.config.file}" overwrite="true">
+            <filterchain>
+                <expandproperties/>
+            </filterchain>
+        </copy>
+    </target>
+
+</project>
