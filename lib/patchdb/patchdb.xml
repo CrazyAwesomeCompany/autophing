@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="patchdb" default="patchdb" basedir=".">
+    <property file="${phing.dir.patchdb}/patchdb.properties" />
+
+     <!-- Run patchdb (make sure the user has privileges on the db)-->
+    <target name="patchdb">
+        <chmod file="${patchdb.file}" mode="0777" />
+        <exec passthru="${passthru}" command="${patchdb.file} -C -d ${database.name} -u ${database.user} -p {$database.password} -P ${patchdb.patches}"/>
+    </target>
+
+</project>
