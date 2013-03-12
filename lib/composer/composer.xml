@@ -9,16 +9,16 @@
                 <exec passthru="${passthru}" executable="php">
                     <arg value="${composer.file}" />
                     <arg value="install" />
-                    <arg value="-n" />
-                    <arg value="--no-ansi" />
+                    <arg value="--no-dev" />
+                    <arg value="--no-progress" />
                 </exec>
             </then>
             <else>
                 <exec passthru="${passthru}" executable="php">
                     <arg value="${composer.file}" />
                     <arg value="update" />
-                    <arg value="-n" />
-                    <arg value="--no-ansi" />
+                    <arg value="--no-dev" />
+                    <arg value="--no-progress" />
                 </exec>
             </else>
         </if>
@@ -32,8 +32,7 @@
                     <arg value="${composer.file}" />
                     <arg value="install" />
                     <arg value="--dev" />
-                    <arg value="-n" />
-                    <arg value="--no-ansi" />
+                    <arg value="--no-progress" />
                 </exec>
             </then>
             <else>
@@ -41,8 +40,7 @@
                     <arg value="${composer.file}" />
                     <arg value="update" />
                     <arg value="--dev" />
-                    <arg value="-n" />
-                    <arg value="--no-ansi" />
+                    <arg value="--no-progress" />
                 </exec>
             </else>
         </if>
@@ -52,6 +50,7 @@
         <exec passthru="${passthru}" executable="php">
             <arg value="${composer.file}" />
             <arg value="self-update" />
+            <arg value="--no-progress" />
         </exec>
     </target>
 
