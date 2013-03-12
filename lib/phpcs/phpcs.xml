@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="phpcs" default="phpcs" basedir=".">
+    <property file="${phing.dir.phpcs}/phpcs.properties" />
+
+   <target name="phpcs" description="Generate checkstyle.xml using PHP_CodeSniffer">
+        <exec passthru="${passthru}" command="${phpcs.file} --standard=${phpcs.standards.file}
+                            --ignore='${phpcs.exclude.path}'
+                            --report=checkstyle
+                            --report-file=${phpcs.checkstyle.file}
+                            ${phpcs.include.path}" />
+    </target>
+
+    <target name="phpcs-tty" description="human readable report for PHP CodeSniffer Standards Check">
+        <exec outputProperty="standards-check.output" escape="false" command="${phpcs.file} --standard=${phpcs.standards.file}
+                        --ignore=${phpcs.exclude.path}
+                        ${phpcs.include.path}" />
+        <echo msg="${standards-check.output}" />
+    </target>
+
+</project>

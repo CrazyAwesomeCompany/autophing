@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="pdepend" default="pdepend" basedir=".">
+    <property file="${phing.dir.pdepend}/pdepend.properties" />
+
+     <target name="pdepend"
+        description="Generate jdepend.xml and software metrics charts using PHP_Depend">
+        <exec passthru="${passthru}" executable="${pdepend.file}">
+            <arg value="--jdepend-xml=${pdepend.xml.file}" />
+            <arg value="--jdepend-chart=${pdepend.chart.file}" />
+            <arg value="--overview-pyramid=${pdepend.pyramid.file}" />
+            <arg path="${pdepend.source}" />
+        </exec>
+    </target>
+
+</project>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="PHP_CodeSniffer AutoPhing">
+ <description>The coding standard for AutoPhing PHP_CodeSniffer.</description>
+
+ <!-- Include the whole PSR2 standard -->
+ <rule ref="PSR2">
+ </rule>
+
+ <rule ref="Generic.Files.LineLength">
+  <properties>
+   <property name="lineLimit" value="120"/>
+   <property name="absoluteLineLimit" value="140"/>
+  </properties>
+ </rule>
+
+</ruleset>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="phpmd" default="phpmd" basedir=".">
+    <property file="${phing.dir.phpmd}/phpmd.properties" />
+
+    <target name="phpmd" description="Generate pmd.xml using PHPMD">
+        <exec passthru="${passthru}" executable="${phpmd.file}">
+            <arg path="${project.basedir}" />
+            <arg value="xml" />
+            <arg value="${phpmd.config}" />
+            <arg value="--reportfile" />
+            <arg value="${phpmd.log.file}" />
+            <arg value="--exclude" />
+            <arg value="${phpmd.exclude}" />
+        </exec>
+    </target>
+
+</project>
