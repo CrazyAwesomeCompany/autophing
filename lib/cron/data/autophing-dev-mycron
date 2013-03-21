@@ -1,0 +1,1 @@
+01 * * * * root ${project.basedir}/vendor/bin/phing phplint-dirs -Dproject.environment=dev

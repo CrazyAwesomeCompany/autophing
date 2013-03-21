@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="cron" default="cron-deploy" basedir=".">
+    <property file="${phing.dir.cron}/cron.properties" />
+
+    <target name="cron-deploy">
+        <phingcall target="cron-delete-files" />
+        <phingcall target="cron-copy-files" />
+    </target>
+
+    <target name="cron-copy-files">
+        <copy todir="${cron.location}">
+            <filterchain>
+                <expandproperties/>
+            </filterchain>
+
+            <fileset dir="${cron.files}">
+                <include name="${project.app}-${project.environment}-*" />
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="cron-delete-files">
+        <delete>
+            <fileset dir="${cron.location}">
+                <include name="${project.app}-${project.environment}-*" />
+            </fileset>
+        </delete>
+    </target>
+
+    <target name="cron-start">
+        <exec passthru="${passthru}" command="${cron.program} start" />
+    </target>
+
+    <target name="cron-stop">
+        <exec passthru="${passthru}" command="${cron.program} stop" />
+    </target>
+
+    <target name="cron-restart">
+        <exec passthru="${passthru}" command="${cron.program} restart" />
+    </target>
+
+</project>

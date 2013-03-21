@@ -16,8 +16,8 @@ Run the composer self-update command. This will update the composer file
 
 ## Configuration ##
 
-`composer.file` - The composer.phar file
-`composer.lock` - The composer.lock file
++ `composer.file` - The composer.phar file
++ `composer.lock` - The composer.lock file
 
 ## Dependencies ##
 None
