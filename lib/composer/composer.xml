@@ -8,17 +8,21 @@
             <then>
                 <exec passthru="${passthru}" executable="php">
                     <arg value="${composer.file}" />
+                    <arg value="-n" />
+                    <arg value="-q" />
                     <arg value="install" />
                     <arg value="--no-dev" />
-                    <arg value="--no-progress" />
+                    <arg value="--prefer-dist" />
                 </exec>
             </then>
             <else>
                 <exec passthru="${passthru}" executable="php">
                     <arg value="${composer.file}" />
+                    <arg value="-n" />
+                    <arg value="-q" />
                     <arg value="update" />
                     <arg value="--no-dev" />
-                    <arg value="--no-progress" />
+                    <arg value="--prefer-dist" />
                 </exec>
             </else>
         </if>
@@ -30,17 +34,19 @@
             <then>
                 <exec passthru="${passthru}" executable="php">
                     <arg value="${composer.file}" />
+                    <arg value="-n" />
+                    <arg value="-q" />
                     <arg value="install" />
                     <arg value="--dev" />
-                    <arg value="--no-progress" />
                 </exec>
             </then>
             <else>
                 <exec passthru="${passthru}" executable="php">
                     <arg value="${composer.file}" />
+                    <arg value="-n" />
+                    <arg value="-q" />
                     <arg value="update" />
                     <arg value="--dev" />
-                    <arg value="--no-progress" />
                 </exec>
             </else>
         </if>
@@ -49,8 +55,9 @@
     <target name="composer-update">
         <exec passthru="${passthru}" executable="php">
             <arg value="${composer.file}" />
+            <arg value="-n" />
+            <arg value="-q" />
             <arg value="self-update" />
-            <arg value="--no-progress" />
         </exec>
     </target>
 
