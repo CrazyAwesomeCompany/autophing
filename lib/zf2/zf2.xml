@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="zf2localconfig" default="zf2-generate-config" basedir=".">
-    <property file="${phing.dir.zf2localconfig}/zf2-localconfig.properties" />
+<project name="zf2" default="zf2-generate-config" basedir=".">
+    <property file="${phing.dir.zf2}/zf2.properties" />
 
     <target name="zf2-generate-config"  description="generate configuration file based on .properties">
         <copy file="${zf2.config.template}" tofile="${zf2.config.file}" overwrite="true">
@@ -8,6 +8,10 @@
                 <expandproperties/>
             </filterchain>
         </copy>
+    </target>
+
+    <target name="zf2-console-command">
+        <exec passthru="${passthru}" command="php ${zf2.application.file} ${zf2.console.command}" />
     </target>
 
 </project>

@@ -1,7 +1,7 @@
-AutoPhing Zend Framework 2 Local Config
-=======================================
+AutoPhing Zend Framework 2
+==========================
 
-Create a Zend Framework 2 local.php configuration file based on the local.php.dist file
+Zend Framework 2 targets
 
 ## Targets ##
 
