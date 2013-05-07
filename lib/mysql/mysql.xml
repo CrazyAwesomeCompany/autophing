@@ -14,7 +14,7 @@
         </if>
 
         <if>
-            <equals arg1="${mysql.dump.gzip" arg2="true" />
+            <equals arg1="${mysql.dump.gzip}" arg2="true" />
             <then>
                 <exec passthru="${passthru}" command="gzip ${mysql.dump.file}" />
             </then>
