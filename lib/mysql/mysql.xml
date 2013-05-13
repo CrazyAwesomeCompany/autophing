@@ -21,4 +21,20 @@
         </if>
     </target>
 
+    <target name="mysql-clean" description="drop all tables">
+        <if>
+            <equals arg1="${database.password}" arg2="" />
+            <then>
+                <exec passthru="${passthru}"
+                    command="mysqldump -u${database.user} --add-drop-table --no-data ${database.name} | grep '^DROP\|^\/\*\!' | mysql -u${database.user} ${database.name}">
+                </exec>
+            </then>
+            <else>
+                <exec passthru="${passthru}"
+                    command="mysqldump -u${database.user} -p${database.password} --add-drop-table --no-data ${database.name} | grep '^DROP\|^\/\*\!' | mysql -u${database.user} -p${database.password} ${database.name}">
+                </exec>
+            </else>
+        </if>
+    </target>
+
 </project>
