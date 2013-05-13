@@ -21,6 +21,22 @@
         </if>
     </target>
 
+    <target name="mysql-drop" description="drop database">
+        <if>
+            <equals arg1="${database.password}" arg2="" />
+            <then>
+                <exec passthru="${passthru}"
+                    command="mysql -u${database.user} -e 'SET FOREIGN_KEY_CHECKS = 0; DROP DATABASE ${database.name}; SET FOREIGN_KEY_CHECKS = 1;'">
+                </exec>
+            </then>
+            <else>
+                <exec passthru="${passthru}"
+                    command="mysql -u${database.user} -p${database.password} -e 'SET FOREIGN_KEY_CHECKS = 0; DROP DATABASE ${database.name}; SET FOREIGN_KEY_CHECKS = 1;'">
+                </exec>
+            </else>
+        </if>
+    </target>
+
     <target name="mysql-clean" description="drop all tables">
         <if>
             <equals arg1="${database.password}" arg2="" />
