@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="phpunit" default="phpunit" basedir=".">
+
+    <target name="phpunit"
+        description="Run unit tests using PHPUnit">
+        <exec passthru="${passthru}" executable="${phpunit.file}">
+            <arg value="-c" />
+            <arg path="${phpunit.config}" />
+        </exec>
+    </target>
+
+</project>
