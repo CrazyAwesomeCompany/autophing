@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="phpunit" default="phpunit" basedir=".">
+    <property file="${phing.dir.phpunit}/phpunit.properties" />
 
     <target name="phpunit"
         description="Run unit tests using PHPUnit">
