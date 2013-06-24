@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="csslint" default="csslint" basedir=".">
+    <property file="${phing.dir.csslint}/csslint.properties" />
+
+    <target name="csslint">
+        <exec passthru="${passthru}" command="java -jar
+            ${rhino.jar}
+            ${csslint.file}
+            --format=${csslint.format}
+            ${csslint.source}
+            > ${csslint.results.file}" />
+
+    </target>
+
+    <target name="csslint-tty">
+        <exec passthru="${passthru}" outputProperty="csslint.output" executable="java">
+            <arg line="-jar" />
+            <arg line="${rhino.jar}" />
+            <arg line="${csslint.file}" />
+            <arg line="${csslint.source}" />
+        </exec>
+        <echo msg="${csslint.output}" />
+    </target>
+</project>
