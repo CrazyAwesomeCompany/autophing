@@ -9,7 +9,6 @@
             --format=${csslint.format}
             ${csslint.source}
             > ${csslint.results.file}" />
-
     </target>
 
     <target name="csslint-tty">

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="yuicompressor" default="yuicompressor" basedir=".">
+    <property file="${phing.dir.yuicompressor}/yuicompressor.properties" />
+
+    <target name="yuicompressor">
+        <exec passthru="${passthru}" command="java -jar
+            ${yuicompressor.jar}
+            ${yuicompressor.options}
+            -o ${yuicompressor.outputfile}
+            ${yuicompressor.inputfile}" />
+    </target>
+</project>
