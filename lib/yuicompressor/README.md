@@ -3,9 +3,6 @@ AutoPhing YUICompressor
 
 Run YUICompressor
 
-## Usage ##
-TODO
-
 ## Targets ##
 
 ### yuicompressor ###
