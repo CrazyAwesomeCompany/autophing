@@ -2,8 +2,8 @@
 <project name="jslint" default="jslint" basedir=".">
     <property file="${phing.dir.jslint}/jslint.properties" />
 
-    <target passthru="${passthru}" name="jslint">
-        <exec dir="${jslint.exec.dir}" command="java -jar ${jslint.jar}
+    <target name="jslint">
+        <exec passthru="${passthru}"  dir="${jslint.exec.dir}" command="java -jar ${jslint.jar}
             --report ${jslint.format}
             ${jslint.options}
             ${jslint.source}
@@ -11,8 +11,8 @@
         " />
     </target>
 
-    <target passthru="${passthru}" name="jslint-tty">
-        <exec dir="${jslint.exec.dir}" outputProperty="jslint.output" command="java -jar ${jslint.jar}
+    <target name="jslint-tty">
+        <exec passthru="${passthru}" dir="${jslint.exec.dir}" outputProperty="jslint.output" command="java -jar ${jslint.jar}
             ${jslint.options}
             ${jslint.source}
         " />
