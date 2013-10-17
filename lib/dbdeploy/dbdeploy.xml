@@ -4,7 +4,9 @@
 
     <property name="dbdeploy.dsn" value="${database.driver}:dbname=${database.name};host=${database.host}" />
 
+    <!-- DEPRECATED: dbdeploy-clean target is renamed to mysql-clean. Will be removed on release 1.3 -->
     <target name="dbdeploy-clean" description="drop all tables">
+        <echo msg="DEPRECATED: dbdeploy-clean is renamed to mysql-clean. Will be removed on release 1.3" />
         <if>
             <equals arg1="${database.password}" arg2="" />
             <then>
