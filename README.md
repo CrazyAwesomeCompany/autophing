@@ -23,6 +23,7 @@ A lot of the AutoPhing build files use configuration parameters to run the comma
 + [CSSLint](lib/csslint/README.md)
 + DBDeploy
 + Doctrine
++ [Java](lib/java/README.md)
 + [JSLint](lib/jslint/README.md)
 + Memcached
 + [Mysql](lib/mysql/README.md)
