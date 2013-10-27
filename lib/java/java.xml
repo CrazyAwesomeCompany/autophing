@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="java" default="java-check" basedir=".">
+    <property file="${phing.dir.java}/java.properties" />
+
+    <target name="java-check">
+        <trycatch property="java.placeholder">
+            <try>
+                <exec passthru="${passthru}" checkreturn="true" outputProperty="java.version" command="java -version" />
+                <property name="java.available" value="true" />
+            </try>
+            <catch>
+                <property name="java.available" value="false" />
+            </catch>
+        </trycatch>
+    </target>
+</project>
