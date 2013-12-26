@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="zendserver" default="restartPhp" basedir=".">
+    <property file="${phing.dir.zendserver}/zendserver.properties" />
+
+    <!-- Set include path to autoload Phing tasks -->
+    <includepath classpath="${phing.dir.zendserver}/src" />
+
+    <!-- Define ZendServer specific tasks -->
+    <taskdef name="restartPhp" classname="RestartPhp"/>
+    <taskdef name="cacheClear" classname="CacheClear"/>
+</project>
