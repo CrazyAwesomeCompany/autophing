@@ -37,4 +37,5 @@ A lot of the AutoPhing build files use configuration parameters to run the comma
 + [YUICompressor](lib/yuicompressor/README.md)
 + [Zend Framework](lib/zf/README.md)
 + [Zend Framework 2](lib/zf2/README.md)
++ [Zend Server](lib/zendserver/README.md)
 
