@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="swagger" default="swagger-generate-docs" basedir=".">
+    <property file="${phing.dir.swagger}/swagger.properties" />
+
+    <target name="swagger-generate-docs">
+        <exec passthru="${passthru}" executable="${swagger.file}">
+            <arg value="${swagger.api.source}" />
+            <arg line="-o ${swagger.docs.output}" />
+            <arg line="--default-base-path ${swagger.api.url}" />
+            <arg line="--default-api-version ${swagger.api.version}" />
+        </exec>
+    </target>
+
+</project>
