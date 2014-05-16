@@ -20,7 +20,7 @@
                     <arg value="${composer.file}" />
                     <arg value="-n" />
                     <arg value="-q" />
-                    <arg value="update" />
+                    <arg value="install" />
                     <arg value="--no-dev" />
                     <arg value="--prefer-dist" />
                 </exec>
