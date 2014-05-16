@@ -7,7 +7,7 @@
     </target>
 
     <target name="phplint">
-        <phplint>
+        <phplint haltonfailure="${phplint.haltonfailure}">
             <fileset dir="${phplint.dir}">
                 <include name="*.php" />
                 <include name="**/*.php" />

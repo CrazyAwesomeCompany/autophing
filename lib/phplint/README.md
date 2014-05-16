@@ -12,7 +12,9 @@ Run PHPLint on a directory
 Run PHPLint on multiple directories
 
 ## Configuration ##
-TODO
+
++ `phplint.dir` - Location where the project source files are.
++ `phplint.haltonfailure` - Fail the build when phplint fails
 
 ## Dependencies ##
 None
