@@ -42,6 +42,7 @@
                 dir="${database.deltas.folder}"
                 outputfile="${database.deltas.forward}"
                 undooutputfile="${database.deltas.undo}"
+                checkall="${dbdeploy.checkall}"
             />
             <property name="dbdeploy.diff.executed" value="true" />
         </then>
