@@ -27,6 +27,10 @@ class TasksComplete extends WebApiTask
                 if (!$this->tasksComplete) {
                     echo 'Waiting for tasks to complete' . PHP_EOL;
                     sleep($this->waitUnit);
+                    $this->maxWait = $this->maxWait - $this->waitUnit;
+                    if (0 >= $this->maxWait) {
+                        throw new \RuntimeException('tasksComplete polling timed out!')
+                    }
                 }
             }
             while (!$this->tasksComplete);
