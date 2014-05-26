@@ -29,7 +29,7 @@ class TasksComplete extends WebApiTask
                     sleep($this->waitUnit);
                     $this->maxWait = $this->maxWait - $this->waitUnit;
                     if (0 >= $this->maxWait) {
-                        throw new \RuntimeException('tasksComplete polling timed out!')
+                        throw new \RuntimeException('tasksComplete polling timed out!');
                     }
                 }
             }
