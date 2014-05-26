@@ -3,12 +3,41 @@ require_once 'phing/Task.php';
 
 abstract class WebApiTask extends Task
 {
+    const HTTP_METHOD_GET = 'GET';
+    const HTTP_METHOD_POST = 'POST';
+
+    /**
+     * HTTP method
+     *
+     * @var string
+     */
+    private $method = self::HTTP_METHOD_POST;
+
     /**
      * Request parameter storage
      *
      * @var array
      */
     protected $params = array();
+
+    /**
+     * @param string $method
+     */
+    private function setMethod($method)
+    {
+        if (!in_array($method, array(self::HTTP_METHOD_GET, self::HTTP_METHOD_POST))) {
+            throw new \UnexpectedValueException('Method not allowed');
+        }
+        $this->method = $method;
+    }
+
+    /**
+     * @return string
+     */
+    private function getMethod()
+    {
+        return $this->method;
+    }
 
     /**
      * Set all the params for the body or query string
@@ -34,9 +63,10 @@ abstract class WebApiTask extends Task
      * @param $task
      * @throws RuntimeException
      */
-    protected function executeApiTask($task)
+    protected function executeApiTask($task, $method = self::HTTP_METHOD_POST)
     {
         $tstamp = time();
+        $this->setMethod($method);
         $version = $this->getProject()->getProperty('zendserver.config.version');
         $host = $this->getProject()->getProperty('zendserver.config.host');
         $path = '/ZendServer/Api/'.$task;
@@ -46,24 +76,30 @@ abstract class WebApiTask extends Task
 
         $opts = array(
             'http' => array(
-                'method' => 'POST',
+                'method' => $this->getMethod(),
                 'header' =>
                     "User-Agent: ". $this->getProject()->getProperty('zendserver.config.userAgent'). "\r\n".
                     "X-Zend-Signature: $signature\r\n".
-                    "Accept: application/vnd.zend.serverapi+xml;version=$version\r\n".
-                    "Date: ". gmdate('D, d M Y H:i:s ', $tstamp) . "GMT\r\n".
-                    "Content-Type: application/x-www-form-urlencoded\r\n".
-                    "Content-Length: ".strlen($body)."\r\n",
-                'content' => $body,
+                    "Accept: application/vnd.zend.serverapi+json;version=$version\r\n".
+                    "Date: ". gmdate('D, d M Y H:i:s ', $tstamp) . "GMT\r\n",
             ),
         );
+
+        if (self::HTTP_METHOD_POST === $this->getMethod()) {
+            $opts['http']['header'] .= "Content-Type: application/x-www-form-urlencoded\r\n".
+                "Content-Length: ".strlen($body)."\r\n";
+            $opts['http']['content'] = $body;
+        } else {
+            $path .= '?'.$body;
+        }
 
         $context = stream_context_create($opts);
 
         $result = @file_get_contents('http://'.$host.$path, false, $context);
         if (!$result) {
-            throw new RuntimeException('Problem communicating with Zend Server instance');
+            throw new \RuntimeException('Problem communicating with Zend Server instance');
         }
+        return json_decode($result);
     }
 
     /**
@@ -74,7 +110,7 @@ abstract class WebApiTask extends Task
      * @param integer $timestamp Timestamp used for the 'Date:' HTTP header
      * @return string Calculated request signature
      */
-    protected function generateRequestSignature($host, $path, $timestamp)
+    private function generateRequestSignature($host, $path, $timestamp)
     {
         $data = $host . ":" .
             $path . ":" .
