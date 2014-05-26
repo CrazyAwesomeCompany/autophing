@@ -6,6 +6,8 @@
     <includepath classpath="${phing.dir.zendserver}/src" />
 
     <!-- Define ZendServer specific tasks -->
+    <taskdef name="systemInfo" classname="SystemInfo"/>
+    <taskdef name="tasksComplete" classname="TasksComplete"/>
     <taskdef name="restartPhp" classname="RestartPhp"/>
     <taskdef name="cacheClear" classname="CacheClear"/>
 </project>
