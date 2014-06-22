@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="solr" default="solr-core-reload" basedir=".">
+    <property file="${phing.dir.solr}/solr.properties" />
+    
+    <target name="solr-core-create">
+        <available property="solr.core.available" file="${solr.config.destination}/${solr.core.name}" type="dir" />
+
+        <if>
+            <equals arg1="${solr.core.available}" arg2="true" />
+            <then>
+                <!--  Core already available. Only remove config and let it rebuild -->
+                <if>
+                    <!-- It can be possible to have same source and destination. Don't remove -->
+                    <not><equals arg1="${solr.config.source}/${solr.core.source}" arg2="${solr.config.destination}/${solr.core.name}" /></not>
+                    <then>
+                        <delete>
+                            <fileset dir="${solr.config.destination}/${solr.core.name}">
+                                <exclude name="data/**" />
+                            </fileset>
+                        </delete>
+                    </then>
+                </if>
+            </then>
+        </if>
+
+        <!-- Copy the contents of the config to the core -->
+        <copy todir="${solr.config.destination}/${solr.core.name}">
+            <fileset dir="${solr.config.source}/${solr.core.source}">
+                <exclude name="data/**" />
+            </fileset>
+        </copy>
+
+        <if>
+            <equals arg1="${solr.core.available}" arg2="true" />
+            <then>
+                <phingcall target="solr-api-core-reload" />
+            </then>
+            <else>
+                <phingcall target="solr-api-core-create" />
+            </else>
+        </if>
+    </target>
+
+    <target name="solr-api-core-create">
+        <exec passthru="${passthru}" executable="curl" escape="true">
+            <arg line="-X" />
+            <arg value="GET" />
+            <arg value="${solr.http.url}admin/cores?action=CREATE&amp;name=${solr.core.name}&amp;instanceDir=${solr.core.name}&amp;persist=true" />
+        </exec>
+    </target>
+
+    <target name="solr-api-core-reload">
+        <exec passthru="${passthru}" executable="curl" escape="true">
+            <arg line="-X" />
+            <arg value="GET" />
+            <arg value="${solr.http.url}admin/cores?action=RELOAD&amp;core=${solr.core.name}" />
+        </exec>
+    </target>
+    
+    <target name="solr-api-core-unload">
+        <exec passthru="${passthru}" executable="curl" escape="true">
+            <arg line="-X" />
+            <arg value="GET" />
+            <arg value="${solr.http.url}admin/cores?action=UNLOAD&amp;core=${solr.core.name}" />
+        </exec>
+    </target>
+</project>

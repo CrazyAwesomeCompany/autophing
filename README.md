@@ -33,6 +33,7 @@ A lot of the AutoPhing build files use configuration parameters to run the comma
 + [PHPLint](lib/phplint/README.md)
 + PHPMD
 + PHPUnit
++ [Solr](lib/solr/README.md)
 + [Swagger](lib/swagger/README.md)
 + [Webistrano](lib/webistrano/README.md)
 + [YUICompressor](lib/yuicompressor/README.md)
