@@ -7,15 +7,35 @@ require_once 'WebApiTask.php';
  */
 class TasksComplete extends WebApiTask
 {
+    /**
+     * @var boolean
+     */
     private $tasksComplete = false;
 
+    /**
+     * @var integer
+     */
     private $waitUnit = 1;
 
+    /**
+     * @var integer
+     */
     private $maxWait = 30;
 
+    /**
+     * Set the interval to wait between checks
+     */
     public function setWaitUnit($waitUnit)
     {
         $this->waitUnit = intval($waitUnit);
+    }
+
+    /**
+     * Set the maximum waiting time
+     */
+    public function setMaxWait($maxWait)
+    {
+        $this->maxWait = $maxWait;
     }
 
     public function main()

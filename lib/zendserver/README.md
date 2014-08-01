@@ -16,12 +16,19 @@ Example:
 <cacheClear component="${zendserver.cacheClear.datacache}"/>
 ```
 
-### tasksComplete ###
-Task to check if asynchronous tasks like ```cacheClear``` have completed.
+### restartPhp ###
+Restart the Zend Server instance or cluster either graceful or forced. The force parameter is optional.
 
-Poll every second example:
 ```
-<tasksComplete waitUnit="1" />
+<restartPhp force="true" />
+```
+
+### tasksComplete ###
+Task to check if asynchronous tasks like `cacheClear` have completed.
+
+Poll every second example and wait for maximum seconds. These are optional values, and the defaults are shown here.
+```
+<tasksComplete waitUnit="1" maxWait="30" />
 ```
 
 ## Configuration ##
