@@ -3,8 +3,19 @@
     <property file="${phing.dir.cron}/cron.properties" />
 
     <target name="cron-deploy">
-        <phingcall target="cron-delete-files" />
-        <phingcall target="cron-copy-files" />
+        <if>
+            <equals arg1="${cron.sudo}" arg2="true" />
+            <then>
+                <echo message="Running cron targets as sudo"/>
+                <phingcall target="cron-delete-files-sudo" />
+                <phingcall target="cron-copy-files-sudo" />
+            </then>
+            <else>
+                <echo message="Running cron targets as regular user"/>
+                <phingcall target="cron-delete-files" />
+                <phingcall target="cron-copy-files" />
+            </else>
+        </if>
     </target>
 
     <target name="cron-copy-files">
@@ -25,6 +36,14 @@
                 <include name="${project.app}-${project.environment}-*" />
             </fileset>
         </delete>
+    </target>
+
+    <target name="cron-copy-files-sudo">
+        <exec command="sudo cp ${cron.files}${project.app}-${project.environment}-* ${cron.location}" logoutput="true"/>
+    </target>
+
+    <target name="cron-delete-files-sudo">
+        <exec command="sudo rm ${cron.location}/${project.app}-${project.environment}-*" />
     </target>
 
     <target name="cron-start">
