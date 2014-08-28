@@ -38,6 +38,7 @@ Restart the cron program
 + `cron.files` - Location where the project cron files are
 + `cron.location` - Location on the server where the project cron files should be placed
 + `cron.program` - The cron program location
++ `cron.sudo` - Boolean. Run as sudo. (default false)
 
 #### Global configuration ####
 The cron targets use some global project properties to know which cron files should be copied/deleted.
