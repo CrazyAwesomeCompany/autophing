@@ -50,7 +50,7 @@ The cron targets use some global project properties to know which cron files sho
 A Cron program installed on the server
 
 ### Sudocron ###
-Some servers require the root user to manage files in the /etc/cron.d directories (depending on OS). When using the cron.sudo option some targets will execute the "sudo" command. To prevent the sudo command from asking password, you could edit the sudoers file to support certain commands;
+Some servers require the root user to manage files in the /etc/cron.d directories (depending on OS). When using the cron.sudo option some targets will execute the "sudo" command. To prevent the sudo command from asking password, you could edit the sudoers file (use `visudo` for this) to support certain commands;
 ```
 deployusername ALL=NOPASSWD:/bin/rm /etc/cron.d/*
 deployusername ALL=NOPASSWD:/bin/cp /deploy/folder/root/* /etc/cron.d/*
