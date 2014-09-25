@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="cron" default="cron-deploy" basedir=".">
     <property file="${phing.dir.cron}/cron.properties" />
+    <tstamp>
+        <format property="TIMESTAMP" pattern="%s" />
+    </tstamp>
 
     <target name="cron-deploy">
         <if>
@@ -39,7 +42,18 @@
     </target>
 
     <target name="cron-copy-files-sudo">
-        <exec command="sudo cp ${cron.files}${project.app}-${project.environment}-* ${cron.location}" logoutput="true"/>
+        <copy todir="/tmp/phing-cron-copy-${TIMESTAMP}">
+            <filterchain>
+                <expandproperties/>
+            </filterchain>
+
+            <fileset dir="${cron.files}">
+                <include name="${project.app}-${project.environment}-*" />
+            </fileset>
+        </copy>
+
+        <exec command="sudo cp /tmp/phing-cron-copy-${TIMESTAMP}/* ${cron.location}" logoutput="true"/>
+        <exec command="sudo rm /tmp/phing-cron-copy-${TIMESTAMP} -rf" logoutput="true"/>
     </target>
 
     <target name="cron-delete-files-sudo">
