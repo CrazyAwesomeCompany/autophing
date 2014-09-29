@@ -19,11 +19,15 @@
     </target>
 
     <target name="cron-copy-files">
-        <copy todir="${cron.location}">
+        <reflexive>
+            <fileset dir="${cron.files}">
+                <include name="${project.app}-${project.environment}-*" />
+            </fileset>
             <filterchain>
                 <expandproperties/>
             </filterchain>
-
+        </reflexive>
+        <copy todir="${cron.location}">
             <fileset dir="${cron.files}">
                 <include name="${project.app}-${project.environment}-*" />
             </fileset>
