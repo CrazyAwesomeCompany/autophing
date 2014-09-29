@@ -19,11 +19,15 @@
     </target>
 
     <target name="cron-copy-files">
-        <copy todir="${cron.location}">
+        <reflexive>
+            <fileset dir="${cron.files}">
+                <include name="${project.app}-${project.environment}-*" />
+            </fileset>
             <filterchain>
                 <expandproperties/>
             </filterchain>
-
+        </reflexive>
+        <copy todir="${cron.location}">
             <fileset dir="${cron.files}">
                 <include name="${project.app}-${project.environment}-*" />
             </fileset>
@@ -39,6 +43,14 @@
     </target>
 
     <target name="cron-copy-files-sudo">
+        <reflexive>
+            <fileset dir="${cron.files}">
+                <include name="${project.app}-${project.environment}-*" />
+            </fileset>
+            <filterchain>
+                <expandproperties/>
+            </filterchain>
+        </reflexive>
         <exec command="sudo cp ${cron.files}${project.app}-${project.environment}-* ${cron.location}" logoutput="true"/>
     </target>
 
