@@ -2,15 +2,15 @@
 <project name="memcached" basedir=".">
 
     <target name="memcached-start" description="start memcached">
-        <exec passthru="${passthru}" command="service memcached start" />
+        <exec checkreturn="${checkreturn}" passthru="${passthru}" command="service memcached start" />
     </target>
 
     <target name="memcached-stop" description="stop memcached">
-        <exec passthru="${passthru}" command="service memcached stop" />
+        <exec checkreturn="${checkreturn}" passthru="${passthru}" command="service memcached stop" />
     </target>
 
     <target name="memcached-restart" description="restart memcached">
-        <exec passthru="${passthru}" command="service memcached restart" />
+        <exec checkreturn="${checkreturn}" passthru="${passthru}" command="service memcached restart" />
     </target>
 
 </project>

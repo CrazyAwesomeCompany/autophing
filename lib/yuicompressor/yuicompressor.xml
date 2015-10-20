@@ -3,7 +3,7 @@
     <property file="${phing.dir.yuicompressor}/yuicompressor.properties" />
 
     <target name="yuicompressor">
-        <exec passthru="${passthru}" command="java -jar
+        <exec checkreturn="${checkreturn}" passthru="${passthru}" command="java -jar
             ${yuicompressor.jar}
             ${yuicompressor.options}
             -o ${yuicompressor.outputfile}

@@ -6,7 +6,7 @@
         <if>
             <not><available file="${composer.lock}" /></not>
             <then>
-                <exec passthru="${passthru}" executable="php">
+                <exec checkreturn="${checkreturn}" passthru="${passthru}" executable="php">
                     <arg value="${composer.file}" />
                     <arg value="-n" />
                     <arg value="-q" />
@@ -16,7 +16,7 @@
                 </exec>
             </then>
             <else>
-                <exec passthru="${passthru}" executable="php">
+                <exec checkreturn="${checkreturn}" passthru="${passthru}" executable="php">
                     <arg value="${composer.file}" />
                     <arg value="-n" />
                     <arg value="-q" />
@@ -32,7 +32,7 @@
         <if>
             <not><available file="${composer.lock}" /></not>
             <then>
-                <exec passthru="${passthru}" executable="php">
+                <exec checkreturn="${checkreturn}" passthru="${passthru}" executable="php">
                     <arg value="${composer.file}" />
                     <arg value="-n" />
                     <arg value="-q" />
@@ -41,7 +41,7 @@
                 </exec>
             </then>
             <else>
-                <exec passthru="${passthru}" executable="php">
+                <exec checkreturn="${checkreturn}" passthru="${passthru}" executable="php">
                     <arg value="${composer.file}" />
                     <arg value="-n" />
                     <arg value="-q" />
@@ -53,7 +53,7 @@
     </target>
 
     <target name="composer-update">
-        <exec passthru="${passthru}" executable="php">
+        <exec checkreturn="${checkreturn}" passthru="${passthru}" executable="php">
             <arg value="${composer.file}" />
             <arg value="-n" />
             <arg value="-q" />

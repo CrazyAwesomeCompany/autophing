@@ -4,7 +4,7 @@
 
     <target name="phpunit"
         description="Run unit tests using PHPUnit">
-        <exec passthru="${passthru}" executable="${phpunit.file}">
+        <exec checkreturn="${checkreturn}" passthru="${passthru}" executable="${phpunit.file}" checkreturn="${checkreturn}">
             <arg value="-c" />
             <arg path="${phpunit.config}" />
         </exec>
