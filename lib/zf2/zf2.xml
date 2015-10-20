@@ -11,7 +11,7 @@
     </target>
 
     <target name="zf2-console-command">
-        <exec checkreturn="${checkreturn}" passthru="${passthru}" command="php ${zf2.application.file} ${zf2.console.command}" />
+        <exec checkreturn="${zf2.checkreturn}" passthru="${zf2.passthru}" command="php ${zf2.application.file} ${zf2.console.command}" />
     </target>
 
 </project>

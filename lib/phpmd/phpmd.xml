@@ -3,7 +3,7 @@
     <property file="${phing.dir.phpmd}/phpmd.properties" />
 
     <target name="phpmd" description="Generate pmd.xml using PHPMD">
-        <exec checkreturn="${checkreturn}" passthru="${passthru}" executable="${phpmd.file}">
+        <exec checkreturn="${phpmd.checkreturn}" passthru="${phpmd.passthru}" executable="${phpmd.file}">
             <arg path="${project.basedir}" />
             <arg value="xml" />
             <arg value="${phpmd.config}" />

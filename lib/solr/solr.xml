@@ -42,7 +42,7 @@
     </target>
 
     <target name="solr-api-core-create">
-        <exec checkreturn="${checkreturn}" passthru="${passthru}" executable="curl" escape="true">
+        <exec checkreturn="${solr.checkreturn}" passthru="${solr.passthru}" executable="curl" escape="true">
             <arg line="-X" />
             <arg value="GET" />
             <arg value="${solr.http.url}admin/cores?action=CREATE&amp;name=${solr.core.name}&amp;instanceDir=${solr.core.name}&amp;persist=true" />
@@ -50,7 +50,7 @@
     </target>
 
     <target name="solr-api-core-reload">
-        <exec checkreturn="${checkreturn}" passthru="${passthru}" executable="curl" escape="true">
+        <exec checkreturn="${solr.checkreturn}" passthru="${solr.passthru}" executable="curl" escape="true">
             <arg line="-X" />
             <arg value="GET" />
             <arg value="${solr.http.url}admin/cores?action=RELOAD&amp;core=${solr.core.name}" />
@@ -58,7 +58,7 @@
     </target>
     
     <target name="solr-api-core-unload">
-        <exec checkreturn="${checkreturn}" passthru="${passthru}" executable="curl" escape="true">
+        <exec checkreturn="${solr.checkreturn}" passthru="${solr.passthru}" executable="curl" escape="true">
             <arg line="-X" />
             <arg value="GET" />
             <arg value="${solr.http.url}admin/cores?action=UNLOAD&amp;core=${solr.core.name}" />

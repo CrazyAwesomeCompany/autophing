@@ -4,7 +4,7 @@
 
      <target name="pdepend"
         description="Generate jdepend.xml and software metrics charts using PHP_Depend">
-        <exec checkreturn="${checkreturn}" passthru="${passthru}" executable="${pdepend.file}">
+        <exec checkreturn="${pdepend.checkreturn}" passthru="${pdepend.passthru}" executable="${pdepend.file}">
             <arg value="--jdepend-xml=${pdepend.xml.file}" />
             <arg value="--jdepend-chart=${pdepend.chart.file}" />
             <arg value="--overview-pyramid=${pdepend.pyramid.file}" />

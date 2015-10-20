@@ -5,7 +5,7 @@
     <target name="java-check">
         <trycatch property="java.placeholder">
             <try>
-                <exec passthru="${passthru}" checkreturn="true" outputProperty="java.version" command="java -version" />
+                <exec passthru="${java.passthru}" checkreturn="${java.checkreturn}" outputProperty="java.version" command="java -version" />
                 <property name="java.available" value="true" />
             </try>
             <catch>
