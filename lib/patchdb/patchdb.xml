@@ -8,12 +8,12 @@
         <if>
             <equals arg1="${database.password}" arg2="" />
             <then>
-                <exec passthru="${passthru}"
+                <exec checkreturn="${patchdb.checkreturn}" passthru="${patchdb.passthru}"
                     command="${patchdb.file} -C -d ${database.name} -u ${database.user} -P ${patchdb.patches}">
                 </exec>
             </then>
             <else>
-                <exec passthru="${passthru}"
+                <exec checkreturn="${patchdb.checkreturn}" passthru="${patchdb.passthru}"
                     command="${patchdb.file} -C -d ${database.name} -u ${database.user} -p${database.password} -P ${patchdb.patches}">
                 </exec>
             </else>

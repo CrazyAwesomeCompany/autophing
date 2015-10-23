@@ -3,7 +3,7 @@
     <property file="${phing.dir.csslint}/csslint.properties" />
 
     <target name="csslint">
-        <exec passthru="${passthru}" command="java -jar
+        <exec checkreturn="${csslint.checkreturn}" passthru="${csslint.passthru}" command="java -jar
             ${rhino.jar}
             ${csslint.file}
             --format=${csslint.format}
@@ -12,7 +12,7 @@
     </target>
 
     <target name="csslint-tty">
-        <exec passthru="${passthru}" outputProperty="csslint.output" executable="java">
+        <exec checkreturn="${csslint.checkreturn}" passthru="${csslint.passthru}" outputProperty="csslint.output" executable="java">
             <arg line="-jar" />
             <arg line="${rhino.jar}" />
             <arg line="${csslint.file}" />

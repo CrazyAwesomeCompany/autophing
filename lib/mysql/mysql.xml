@@ -6,17 +6,17 @@
         <if>
             <equals arg1="${database.password}" arg2="" />
             <then>
-                <exec passthru="${passthru}" command="mysqldump -u${database.user} -h${database.host} --opt ${database.name} -P${database.port} > ${mysql.dump.file}" />
+                <exec checkreturn="${mysql.checkreturn}" passthru="${mysql.passthru}" command="mysqldump -u${database.user} -h${database.host} --opt ${database.name} -P${database.port} > ${mysql.dump.file}" />
             </then>
             <else>
-                <exec passthru="${passthru}" command="mysqldump -u${database.user} -p'${database.password}' -h${database.host} -P${database.port} --opt ${database.name} > ${mysql.dump.file}" />
+                <exec checkreturn="${mysql.checkreturn}" passthru="${mysql.passthru}" command="mysqldump -u${database.user} -p'${database.password}' -h${database.host} -P${database.port} --opt ${database.name} > ${mysql.dump.file}" />
             </else>
         </if>
 
         <if>
             <equals arg1="${mysql.dump.gzip}" arg2="true" />
             <then>
-                <exec passthru="${passthru}" command="gzip ${mysql.dump.file}" />
+                <exec checkreturn="${mysql.checkreturn}" passthru="${mysql.passthru}" command="gzip ${mysql.dump.file}" />
             </then>
         </if>
     </target>
@@ -25,12 +25,12 @@
         <if>
             <equals arg1="${database.password}" arg2="" />
             <then>
-                <exec passthru="${passthru}"
+                <exec checkreturn="${mysql.checkreturn}" passthru="${mysql.passthru}"
                     command="mysql -u${database.user} -e 'SET FOREIGN_KEY_CHECKS = 0; DROP DATABASE ${database.name}; SET FOREIGN_KEY_CHECKS = 1;'">
                 </exec>
             </then>
             <else>
-                <exec passthru="${passthru}"
+                <exec checkreturn="${mysql.checkreturn}" passthru="${mysql.passthru}"
                     command="mysql -u${database.user} -p'${database.password}' -e 'SET FOREIGN_KEY_CHECKS = 0; DROP DATABASE ${database.name}; SET FOREIGN_KEY_CHECKS = 1;'">
                 </exec>
             </else>
@@ -41,12 +41,12 @@
         <if>
             <equals arg1="${database.password}" arg2="" />
             <then>
-                <exec passthru="${passthru}"
+                <exec checkreturn="${mysql.checkreturn}" passthru="${mysql.passthru}"
                     command="mysqldump -u${database.user} --add-drop-table --no-data ${database.name} | grep '^DROP\|^\/\*\!' | mysql -u${database.user} ${database.name}">
                 </exec>
             </then>
             <else>
-                <exec passthru="${passthru}"
+                <exec checkreturn="${mysql.checkreturn}" passthru="${mysql.passthru}"
                     command="mysqldump -u${database.user} -p${database.password} --add-drop-table --no-data ${database.name} | grep '^DROP\|^\/\*\!' | mysql -u${database.user} -p${database.password} ${database.name}">
                 </exec>
             </else>

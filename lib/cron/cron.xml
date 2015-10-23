@@ -51,23 +51,24 @@
                 <expandproperties/>
             </filterchain>
         </reflexive>
-        <exec command="sudo cp ${cron.files}${project.app}-${project.environment}-* ${cron.location}" logoutput="true"/>
+        <exec command="sudo cp ${cron.files}${project.app}-${project.environment}-* ${cron.location}" logoutput="true"
+              checkreturn="${cron.checkreturn}" />
     </target>
 
     <target name="cron-delete-files-sudo">
-        <exec command="sudo rm ${cron.location}/${project.app}-${project.environment}-*" />
+        <exec checkreturn="${cron.checkreturn}" command="sudo rm ${cron.location}/${project.app}-${project.environment}-*" />
     </target>
 
     <target name="cron-start">
-        <exec passthru="${passthru}" command="${cron.program} start" />
+        <exec checkreturn="${cron.checkreturn}" passthru="${cron.passthru}" command="${cron.program} start" />
     </target>
 
     <target name="cron-stop">
-        <exec passthru="${passthru}" command="${cron.program} stop" />
+        <exec checkreturn="${cron.checkreturn}" passthru="${cron.passthru}" command="${cron.program} stop" />
     </target>
 
     <target name="cron-restart">
-        <exec passthru="${passthru}" command="${cron.program} restart" />
+        <exec checkreturn="${cron.checkreturn}" passthru="${cron.passthru}" command="${cron.program} restart" />
     </target>
 
 </project>

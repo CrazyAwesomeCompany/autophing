@@ -3,7 +3,7 @@
     <property file="${phing.dir.jslint}/jslint.properties" />
 
     <target name="jslint">
-        <exec passthru="${passthru}"  dir="${jslint.exec.dir}" command="java -jar ${jslint.jar}
+        <exec checkreturn="${jslint.checkreturn}" passthru="${jslint.passthru}"  dir="${jslint.exec.dir}" command="java -jar ${jslint.jar}
             --report ${jslint.format}
             ${jslint.options}
             ${jslint.source}
@@ -12,7 +12,7 @@
     </target>
 
     <target name="jslint-tty">
-        <exec passthru="${passthru}" dir="${jslint.exec.dir}" outputProperty="jslint.output" command="java -jar ${jslint.jar}
+        <exec checkreturn="${jslint.checkreturn}" passthru="${jslint.passthru}" dir="${jslint.exec.dir}" outputProperty="jslint.output" command="java -jar ${jslint.jar}
             ${jslint.options}
             ${jslint.source}
         " />

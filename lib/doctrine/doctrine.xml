@@ -4,11 +4,11 @@
 
     <target name="doctrine-generate-proxies"  description="Generate the doctrine proxy files">
         <mkdir dir="${doctrine.orm.proxy.dir}" />
-        <exec passthru="${passthru}" command="${doctrine.cli} orm:generate-proxies" />
+        <exec checkreturn="${doctrine.checkreturn}" passthru="${doctrine.passthru}" command="${doctrine.cli} orm:generate-proxies" />
     </target>
 
     <target name="doctrine-schema-update">
-        <exec passthru="${passthru}" executable="${doctrine.cli}" dir="${doctrine.cli.config.dir}">
+        <exec checkreturn="${doctrine.checkreturn}" passthru="${doctrine.passthru}" executable="${doctrine.cli}" dir="${doctrine.cli.config.dir}">
             <arg value="orm:schema-tool:update" />
             <arg value="--force" />
         </exec>
