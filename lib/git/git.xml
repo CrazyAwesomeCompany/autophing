@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="git" default="git-changeset-files" basedir=".">
+    <property file="${phing.dir.git}/git.properties" />
+
+    <target name="git-changeset-files">
+        <fail unless="git.revision" message="No valid git revision given"/>
+
+        <exec executable="${git.file}" outputProperty="changesetfiles">
+            <arg value="diff"/>
+            <arg value="--name-only"/>
+            <arg value="${git.revision}"/>
+            <arg value="${git.base.revision}"/>
+        </exec>
+
+        <property name="files.changeset" value="${changesetfiles}">
+            <filterchain>
+                <replaceregexp>
+                    <regexp pattern="\n" replace=" " ignoreCase="true"/>
+                </replaceregexp>
+            </filterchain>
+        </property>
+
+        <property name="files.changeset.php" value="${changesetfiles}">
+            <filterchain>
+                <linecontainsregexp>
+                    <regexp pattern=".php$"/>
+                </linecontainsregexp>
+                <replaceregexp>
+                    <regexp pattern="\n" replace=" " ignoreCase="true"/>
+                </replaceregexp>
+            </filterchain>
+        </property>
+    </target>
+</project>
