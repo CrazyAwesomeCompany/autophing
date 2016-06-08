@@ -10,6 +10,7 @@
     <target name="doctrine-schema-update">
         <exec checkreturn="${doctrine.checkreturn}" passthru="${doctrine.passthru}" executable="${doctrine.cli}" dir="${doctrine.cli.config.dir}">
             <arg value="orm:schema-tool:update" />
+            <arg value="--dump-sql" />
             <arg value="--force" />
         </exec>
     </target>
